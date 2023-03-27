@@ -1,6 +1,8 @@
 package com.william.supermarket;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,11 +11,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     // faço esta instancia do lado de fora para poder usar no onClick do botões entre outros
     private EditText editTextDescricao,editTextNameQuantidade;
-    private String descricao;
-    private int quantidade;
+
+
+//    arrays para serem passados as colunas, para a listagem
+    private ArrayList<String> arrayDescricao = new ArrayList<>();
+    private ArrayList<Integer> arrayQuantidade = new ArrayList<>();
+
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +52,18 @@ public class MainActivity extends AppCompatActivity {
             if(editTextDescricao.getText().equals("") || editTextNameQuantidade.getText().toString().equals("")){
                 msg("Há campos vazios, por favor preenchaos");
             }else{
-                setDescricao(editTextDescricao.getText().toString());
-                setQuantidade(Integer.parseInt(editTextNameQuantidade.getText().toString()));
-                Log.i("entrada","Descrição : "+getDescricao()+"\n Quantidade:"+ getQuantidade());
+                arrayDescricao.add(editTextDescricao.getText().toString());
+                arrayQuantidade.add((Integer.parseInt(editTextNameQuantidade.getText().toString())));
+                Log.i("entrada","Descrição : adicionado com sucesso");
+                try{
+
+//                    Envia os ArrayLists para a tela de listagem
+                    instaciaDeTelaListagem().putStringArrayListExtra("descricao",arrayDescricao);
+                    instaciaDeTelaListagem().putIntegerArrayListExtra("quantidade",getArrayQuantidade());
+                    Log.i("entrada","Descrição : adicionado com sucesso 2");
+                }catch (Exception ex){
+                    Log.e("entrada","envio de dados para a proxima tela: "+ex);
+                }
             }
         }
     };
@@ -57,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             try{
                 Log.i("Buttons","Clicado");
-                proximaTela();
+                startActivity(instaciaDeTelaListagem());
             }catch (Exception ex){
                 Log.e("Buttons","Proxima tela: "+ex);
             }
@@ -68,24 +85,24 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
     // Chama a proxima tela para aparecer na tela principal
-    private void proximaTela(){
+    private Intent instaciaDeTelaListagem(){
         Intent intent = new Intent(this,listagem.class);
-        startActivity(intent);
+        return intent;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public ArrayList<String> getArrayDescricao() {
+        return arrayDescricao;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setArrayDescricao(ArrayList<String> arrayDescricao) {
+        this.arrayDescricao = arrayDescricao;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public ArrayList<Integer> getArrayQuantidade() {
+        return arrayQuantidade;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setArrayQuantidade(ArrayList<Integer> arrayQuantidade) {
+        this.arrayQuantidade = arrayQuantidade;
     }
 }
