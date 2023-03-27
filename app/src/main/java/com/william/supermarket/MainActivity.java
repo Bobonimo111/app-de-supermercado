@@ -43,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             if(editTextDescricao.getText().equals("") || editTextNameQuantidade.getText().toString().equals("")){
                 msg("Há campos vazios, por favor preenchaos");
+            }else{
+                setDescricao(editTextDescricao.getText().toString());
+                setQuantidade(Integer.parseInt(editTextNameQuantidade.getText().toString()));
+                Log.i("entrada","Descrição : "+getDescricao()+"\n Quantidade:"+ getQuantidade());
             }
         }
     };
