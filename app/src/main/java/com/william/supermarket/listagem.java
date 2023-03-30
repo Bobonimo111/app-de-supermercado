@@ -24,8 +24,11 @@ public class listagem extends AppCompatActivity {
 
 
         try{
-            Toast toast = Toast.makeText(getApplicationContext(),arrayDescricao().get(0),Toast.LENGTH_SHORT);
-            toast.show();
+            Bundle bundle = getIntent().getExtras();
+            ArrayList<CharSequence> item = bundle.getCharSequenceArrayList("descricao");
+            ArrayAdapter<String> adapter = new ArrayAdapter(this , android.R.layout.simple_list_item_1,item);
+
+            listviewLista.setAdapter(adapter);
 
         }catch (Exception ex){
             Log.e("captura","captura de array list falhou "+ ex);
@@ -37,16 +40,6 @@ public class listagem extends AppCompatActivity {
     }
 
 
-    private ArrayList<String>  arrayDescricao(){
-        Bundle bundle = getIntent().getExtras();
-        ArrayList<String> descricao = bundle.getStringArrayList("descricao");
-        return descricao;
-    }
-    private ArrayList<Integer>  arrayQuantidade(){
-        Bundle bundle = getIntent().getExtras();
-        ArrayList<Integer> quantidade = bundle.getIntegerArrayList("quantidade");
-        return quantidade;
-    }
 
 
 }
