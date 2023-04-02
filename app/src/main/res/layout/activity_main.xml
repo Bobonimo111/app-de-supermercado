@@ -7,6 +7,7 @@
     android:background="@drawable/imgbackground"
     tools:context=".MainActivity">
 
+
     <TextView
         android:id="@+id/textViewListaDeCompras"
         android:layout_width="wrap_content"
@@ -36,6 +37,8 @@
         android:text="Descrição"
         android:textColor="@color/black"
         android:textSize="25dp"
+
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +54,7 @@
         android:text="Quantidade"
         android:textColor="@color/black"
         android:textSize="25dp"
+
 
 
 
@@ -76,7 +80,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescricao" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescricao"
+        tools:ignore="DuplicateClickableBoundsCheck" />
 
     <EditText
         android:id="@+id/editTextNameQuantidade"
@@ -107,6 +112,7 @@
         android:layout_marginBottom="304dp"
         android:backgroundTint="@color/purple_200"
         android:text="Adicionar"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

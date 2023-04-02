@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 arrayDescricao.add(editTextDescricao.getText().toString());
                 arrayQuantidade.add((Integer.parseInt(editTextNameQuantidade.getText().toString())));
+                editTextDescricao.setText("");
+                editTextNameQuantidade.setText("");
                 Log.i("entrada", "Descrição : adicionado com sucesso");
                 //telaListagem();
                 msg("Adicionado com sucesso");
