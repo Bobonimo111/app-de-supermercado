@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //    arrays para serem passados as colunas, para a listagem
-    private ArrayList<CharSequence> arrayDescricao = new ArrayList<>();
+    private ArrayList<String> arrayDescricao = new ArrayList<>();
     private ArrayList<Integer> arrayQuantidade = new ArrayList<>();
 
     @Override
@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 arrayDescricao.add(editTextDescricao.getText().toString());
                 arrayQuantidade.add((Integer.parseInt(editTextNameQuantidade.getText().toString())));
                 Log.i("entrada", "Descrição : adicionado com sucesso");
-                telaListagem();
+                //telaListagem();
+                msg("Adicionado com sucesso");
 
             }
         }
@@ -85,8 +86,23 @@ public class MainActivity extends AppCompatActivity {
     private void telaListagem() {
         Intent intent = new Intent(this,listagem.class);
         Bundle bundle = new Bundle();
-        bundle.putCharSequenceArrayList("descricao",this.arrayDescricao);
+        bundle.putCharSequenceArrayList("descricao",formatarlistas(this.arrayDescricao,this.arrayQuantidade));
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+    private ArrayList<CharSequence> formatarlistas(ArrayList<String> descricao, ArrayList<Integer> quantidade){
+        ArrayList<CharSequence> retorno = new ArrayList<>();
+
+        try{
+            for(int x = 0;descricao.size() > x;x++){
+            retorno.add(descricao.get(x) +"\n"+quantidade.get(x).toString());
+
+        }
+        }catch (Exception ex){
+            Log.e("entrada", "Descrição : falha ao concaternar "+ ex);
+        }
+
+
+        return retorno;
     }
 }
